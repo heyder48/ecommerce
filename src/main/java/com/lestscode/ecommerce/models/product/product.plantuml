@@ -12,6 +12,13 @@ title __PRODUCT's Class Diagram__\n
             - price : BigDecimal
             + Product()
             + Product()
+            + getDescription()
+            + getId()
+            + getName()
+            + getPrice()
+            + setDescription()
+            + setName()
+            + setPrice()
         }
       }
     }

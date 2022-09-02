@@ -11,6 +11,11 @@ title __ORDER's Class Diagram__\n
             - total : BigDecimal
             + Order()
             + Order()
+            + getCustomer()
+            + getId()
+            + getItems()
+            + getStatus()
+            + getTotal()
         }
       }
     }

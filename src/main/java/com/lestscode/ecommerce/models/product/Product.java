@@ -1,9 +1,16 @@
 package com.lestscode.ecommerce.models.product;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 
+@Entity
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
@@ -11,10 +18,40 @@ public class Product {
 
     public Product(){}
 
-    public Product( String name, String description, BigDecimal price) {
+    public Product( String name, String description, Double price) {
 
         this.name = name;
         this.description = description;
+        this.price = BigDecimal.valueOf(price);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 }

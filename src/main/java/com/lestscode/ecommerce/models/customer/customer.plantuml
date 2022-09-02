@@ -22,13 +22,22 @@ title __CUSTOMER's Class Diagram__\n
         class com.lestscode.ecommerce.models.customer.Customer {
             - id : Long
             - name : String
+            - password : String
             + Customer()
             + Customer()
             + getAddress()
             + getCpf()
             + getEmail()
             + getName()
+            + getPassword()
             + getPhone()
+            + setAddress()
+            + setCpf()
+            + setEmail()
+            + setId()
+            + setName()
+            + setPassword()
+            + setPhone()
         }
       }
     }
