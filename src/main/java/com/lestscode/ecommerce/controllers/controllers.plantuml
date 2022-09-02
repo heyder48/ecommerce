@@ -5,13 +5,33 @@ title __CONTROLLERS's Class Diagram__\n
   namespace com.lestscode.ecommerce {
     namespace controllers {
       class com.lestscode.ecommerce.controllers.CustomerController {
+          + create()
+          + delete()
+          + getById()
           + listAll()
+          + update()
+      }
+    }
+  }
+  
+
+  namespace com.lestscode.ecommerce {
+    namespace controllers {
+      class com.lestscode.ecommerce.controllers.ProductController {
+          + create()
+          + delete()
+          + getById()
+          + listAll()
+          + update()
       }
     }
   }
   
 
   com.lestscode.ecommerce.controllers.CustomerController o-- com.lestscode.ecommerce.services.interfaces.ICustomeService : customeService
+  com.lestscode.ecommerce.controllers.CustomerController o-- com.lestscode.ecommerce.repositories.CustomerRepository : customerRepository
+  com.lestscode.ecommerce.controllers.ProductController o-- com.lestscode.ecommerce.repositories.ProductRepository : productRepository
+  com.lestscode.ecommerce.controllers.ProductController o-- com.lestscode.ecommerce.services.ProductService : productService
 
 
 right footer

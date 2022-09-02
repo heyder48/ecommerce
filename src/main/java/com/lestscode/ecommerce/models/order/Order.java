@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 @Entity
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +20,9 @@ public class Order {
     private OrderStatus status;
 
 
-    @EmbeddedId
+    @OneToOne
+
+    //@JoinColumn(name = "customer_id" , referencedColumnName = "id")
     private Customer customer;
     private BigDecimal total;
 

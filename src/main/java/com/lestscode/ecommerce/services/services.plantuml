@@ -5,7 +5,24 @@ title __SERVICES's Class Diagram__\n
   namespace com.lestscode.ecommerce {
     namespace services {
       class com.lestscode.ecommerce.services.CustomerServices {
+          + create()
+          + delete()
+          + getById()
           + listAll()
+          + update()
+      }
+    }
+  }
+  
+
+  namespace com.lestscode.ecommerce {
+    namespace services {
+      class com.lestscode.ecommerce.services.ProductService {
+          + create()
+          + delete()
+          + getById()
+          + listAll()
+          + update()
       }
     }
   }
@@ -13,6 +30,8 @@ title __SERVICES's Class Diagram__\n
 
   com.lestscode.ecommerce.services.CustomerServices .up.|> com.lestscode.ecommerce.services.interfaces.ICustomeService
   com.lestscode.ecommerce.services.CustomerServices o-- com.lestscode.ecommerce.repositories.CustomerRepository : customerRepository
+  com.lestscode.ecommerce.services.ProductService .up.|> com.lestscode.ecommerce.services.interfaces.IProductService
+  com.lestscode.ecommerce.services.ProductService o-- com.lestscode.ecommerce.repositories.ProductRepository : productRepository
 
 
 right footer

@@ -1,8 +1,8 @@
 package com.lestscode.ecommerce.models.customer;
 
-import com.lestscode.ecommerce.exceptions.CpfInvalidoException;
-import com.lestscode.ecommerce.exceptions.PhoneException;
+
 import com.lestscode.ecommerce.models.forms.CustomerForm;
+import com.lestscode.ecommerce.utils.Utils;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -25,7 +25,7 @@ public class Customer{
 
     public Customer(){}
 
-    public Customer(String name,String cpf, String ddd, String phoneNumber, String emailAddress, String cep,String logadouro,String numero,String bairro, String cidade, String uf) throws CpfInvalidoException, PhoneException {
+    public Customer(String name,String cpf, String ddd, String phoneNumber, String emailAddress, String cep,String logadouro,String numero,String bairro, String cidade, String uf)  {
 
         this.name = name;
         this.cpf = cpf;
@@ -41,7 +41,7 @@ public class Customer{
         this.phone = form.getDdd()+form.getPhoneNumber();
         this.address = form.getLogadouro()+","+form.getNumero()+","+form.getBairro()+","+form.getCidade()+","+form.getUf()+","+form.getCep();
         this.email = form.getEmailAddress();
-        this.password = form.getPassword();
+        this.password = Utils.criptografarSenha(form.getPassword());
     }
 
     public String getName() {

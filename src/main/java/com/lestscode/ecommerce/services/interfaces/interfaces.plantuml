@@ -6,7 +6,26 @@ title __INTERFACES's Class Diagram__\n
     namespace services {
       namespace interfaces {
         interface com.lestscode.ecommerce.services.interfaces.ICustomeService {
+            {abstract} + create()
+            {abstract} + delete()
+            {abstract} + getById()
             {abstract} + listAll()
+            {abstract} + update()
+        }
+      }
+    }
+  }
+  
+
+  namespace com.lestscode.ecommerce {
+    namespace services {
+      namespace interfaces {
+        interface com.lestscode.ecommerce.services.interfaces.IProductService {
+            {abstract} + create()
+            {abstract} + delete()
+            {abstract} + getById()
+            {abstract} + listAll()
+            {abstract} + update()
         }
       }
     }

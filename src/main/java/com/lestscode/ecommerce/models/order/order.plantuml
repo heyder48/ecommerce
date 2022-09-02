@@ -6,14 +6,17 @@ title __ORDER's Class Diagram__\n
     namespace models {
       namespace order {
         class com.lestscode.ecommerce.models.order.Order {
+            - dateCreated : LocalDate
             - id : Long
             - items : List<OrderItem>
             - total : BigDecimal
             + Order()
             + Order()
             + getCustomer()
+            + getDateCreated()
             + getId()
             + getItems()
+            + getNumberOfItems()
             + getStatus()
             + getTotal()
         }
@@ -26,7 +29,28 @@ title __ORDER's Class Diagram__\n
     namespace models {
       namespace order {
         class com.lestscode.ecommerce.models.order.OrderItem {
-            - quantity : int
+            - quantity : Integer
+            + OrderItem()
+            + OrderItem()
+            + getProduct()
+            + getQuantity()
+            + getTotalPrice()
+            + setQuantity()
+        }
+      }
+    }
+  }
+  
+
+  namespace com.lestscode.ecommerce {
+    namespace models {
+      namespace order {
+        class com.lestscode.ecommerce.models.order.OrderProductPK {
+            + OrderProductPK()
+            + getOrder()
+            + getProduct()
+            + setOrder()
+            + setProduct()
         }
       }
     }
@@ -50,7 +74,10 @@ title __ORDER's Class Diagram__\n
 
   com.lestscode.ecommerce.models.order.Order o-- com.lestscode.ecommerce.models.customer.Customer : customer
   com.lestscode.ecommerce.models.order.Order o-- com.lestscode.ecommerce.models.order.OrderStatus : status
-  com.lestscode.ecommerce.models.order.OrderItem o-- com.lestscode.ecommerce.models.product.Product : product
+  com.lestscode.ecommerce.models.order.OrderItem o-- com.lestscode.ecommerce.models.order.OrderProductPK : pk
+  com.lestscode.ecommerce.models.order.OrderProductPK .up.|> java.io.Serializable
+  com.lestscode.ecommerce.models.order.OrderProductPK o-- com.lestscode.ecommerce.models.order.Order : order
+  com.lestscode.ecommerce.models.order.OrderProductPK o-- com.lestscode.ecommerce.models.product.Product : product
 
 
 right footer

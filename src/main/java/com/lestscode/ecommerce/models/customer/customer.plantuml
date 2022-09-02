@@ -5,29 +5,21 @@ title __CUSTOMER's Class Diagram__\n
   namespace com.lestscode.ecommerce {
     namespace models {
       namespace customer {
-        class com.lestscode.ecommerce.models.customer.CPF {
-            - cpfNumber : String
-            + CPF()
-            + getCpf()
-            + validar()
-        }
-      }
-    }
-  }
-  
-
-  namespace com.lestscode.ecommerce {
-    namespace models {
-      namespace customer {
         class com.lestscode.ecommerce.models.customer.Customer {
+            - address : String
+            - cpf : String
+            - email : String
             - id : Long
             - name : String
             - password : String
+            - phone : String
+            + Customer()
             + Customer()
             + Customer()
             + getAddress()
             + getCpf()
             + getEmail()
+            + getId()
             + getName()
             + getPassword()
             + getPhone()
@@ -44,60 +36,6 @@ title __CUSTOMER's Class Diagram__\n
   }
   
 
-  namespace com.lestscode.ecommerce {
-    namespace models {
-      namespace customer {
-        class com.lestscode.ecommerce.models.customer.CustomerAddress {
-            - bairro : String
-            - cep : String
-            - cidade : String
-            - estado : String
-            - logradouro : String
-            - numero : String
-            + CustomerAddress()
-            + getEndereco()
-        }
-      }
-    }
-  }
-  
-
-  namespace com.lestscode.ecommerce {
-    namespace models {
-      namespace customer {
-        class com.lestscode.ecommerce.models.customer.Email {
-            - email : String
-            + Email()
-            + getEmail()
-            + validar()
-        }
-      }
-    }
-  }
-  
-
-  namespace com.lestscode.ecommerce {
-    namespace models {
-      namespace customer {
-        class com.lestscode.ecommerce.models.customer.Phone {
-            + ddd : String
-            + numero : String
-            + Phone()
-            + getTelefone()
-            + validar()
-        }
-      }
-    }
-  }
-  
-
-  com.lestscode.ecommerce.models.customer.CPF .up.|> com.lestscode.ecommerce.models.Validacao
-  com.lestscode.ecommerce.models.customer.Customer o-- com.lestscode.ecommerce.models.customer.CustomerAddress : address
-  com.lestscode.ecommerce.models.customer.Customer o-- com.lestscode.ecommerce.models.customer.CPF : cpf
-  com.lestscode.ecommerce.models.customer.Customer o-- com.lestscode.ecommerce.models.customer.Email : email
-  com.lestscode.ecommerce.models.customer.Customer o-- com.lestscode.ecommerce.models.customer.Phone : phone
-  com.lestscode.ecommerce.models.customer.Email .up.|> com.lestscode.ecommerce.models.Validacao
-  com.lestscode.ecommerce.models.customer.Phone .up.|> com.lestscode.ecommerce.models.Validacao
 
 
 right footer

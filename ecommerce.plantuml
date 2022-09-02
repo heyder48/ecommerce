@@ -17,16 +17,8 @@ title __ECOMMERCE's Class Diagram__\n
   
 
   namespace com.lestscode.ecommerce {
-    namespace exceptions {
-      class com.lestscode.ecommerce.exceptions.CpfInvalidoException {
-      }
-    }
-  }
-  
-
-  namespace com.lestscode.ecommerce {
-    namespace exceptions {
-      class com.lestscode.ecommerce.exceptions.PhoneException {
+    namespace controllers {
+      class com.lestscode.ecommerce.controllers.ProductController {
       }
     }
   }
@@ -35,16 +27,6 @@ title __ECOMMERCE's Class Diagram__\n
   namespace com.lestscode.ecommerce {
     namespace models {
       interface com.lestscode.ecommerce.models.Validacao {
-      }
-    }
-  }
-  
-
-  namespace com.lestscode.ecommerce {
-    namespace models {
-      namespace customer {
-        class com.lestscode.ecommerce.models.customer.CPF {
-        }
       }
     }
   }
@@ -62,28 +44,8 @@ title __ECOMMERCE's Class Diagram__\n
 
   namespace com.lestscode.ecommerce {
     namespace models {
-      namespace customer {
-        class com.lestscode.ecommerce.models.customer.CustomerAddress {
-        }
-      }
-    }
-  }
-  
-
-  namespace com.lestscode.ecommerce {
-    namespace models {
-      namespace customer {
-        class com.lestscode.ecommerce.models.customer.Email {
-        }
-      }
-    }
-  }
-  
-
-  namespace com.lestscode.ecommerce {
-    namespace models {
-      namespace customer {
-        class com.lestscode.ecommerce.models.customer.Phone {
+      namespace dto {
+        class com.lestscode.ecommerce.models.dto.CustomerDto {
         }
       }
     }
@@ -93,7 +55,37 @@ title __ECOMMERCE's Class Diagram__\n
   namespace com.lestscode.ecommerce {
     namespace models {
       namespace dto {
-        class com.lestscode.ecommerce.models.dto.CustomerDto {
+        class com.lestscode.ecommerce.models.dto.ProductDto {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.lestscode.ecommerce {
+    namespace models {
+      namespace forms {
+        class com.lestscode.ecommerce.models.forms.AtualizarCustomerForm {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.lestscode.ecommerce {
+    namespace models {
+      namespace forms {
+        class com.lestscode.ecommerce.models.forms.CustomerForm {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.lestscode.ecommerce {
+    namespace models {
+      namespace forms {
+        class com.lestscode.ecommerce.models.forms.ProductForm {
         }
       }
     }
@@ -114,6 +106,16 @@ title __ECOMMERCE's Class Diagram__\n
     namespace models {
       namespace order {
         class com.lestscode.ecommerce.models.order.OrderItem {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.lestscode.ecommerce {
+    namespace models {
+      namespace order {
+        class com.lestscode.ecommerce.models.order.OrderProductPK {
         }
       }
     }
@@ -149,8 +151,32 @@ title __ECOMMERCE's Class Diagram__\n
   
 
   namespace com.lestscode.ecommerce {
+    namespace repositories {
+      interface com.lestscode.ecommerce.repositories.OrderRepository {
+      }
+    }
+  }
+  
+
+  namespace com.lestscode.ecommerce {
+    namespace repositories {
+      interface com.lestscode.ecommerce.repositories.ProductRepository {
+      }
+    }
+  }
+  
+
+  namespace com.lestscode.ecommerce {
     namespace services {
       class com.lestscode.ecommerce.services.CustomerServices {
+      }
+    }
+  }
+  
+
+  namespace com.lestscode.ecommerce {
+    namespace services {
+      class com.lestscode.ecommerce.services.ProductService {
       }
     }
   }
@@ -166,19 +192,97 @@ title __ECOMMERCE's Class Diagram__\n
   }
   
 
+  namespace com.lestscode.ecommerce {
+    namespace services {
+      namespace interfaces {
+        interface com.lestscode.ecommerce.services.interfaces.IProductService {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.lestscode.ecommerce {
+    namespace validation {
+      interface com.lestscode.ecommerce.validation.CpfConstraint {
+      }
+    }
+  }
+  
+
+  namespace com.lestscode.ecommerce {
+    namespace validation {
+      class com.lestscode.ecommerce.validation.CpfValidator {
+      }
+    }
+  }
+  
+
+  namespace com.lestscode.ecommerce {
+    namespace validation {
+      interface com.lestscode.ecommerce.validation.DDD {
+      }
+    }
+  }
+  
+
+  namespace com.lestscode.ecommerce {
+    namespace validation {
+      class com.lestscode.ecommerce.validation.DddValidator {
+      }
+    }
+  }
+  
+
+  namespace com.lestscode.ecommerce {
+    namespace validation {
+      class com.lestscode.ecommerce.validation.FormErrorDto {
+      }
+    }
+  }
+  
+
+  namespace com.lestscode.ecommerce {
+    namespace validation {
+      interface com.lestscode.ecommerce.validation.Phone {
+      }
+    }
+  }
+  
+
+  namespace com.lestscode.ecommerce {
+    namespace validation {
+      class com.lestscode.ecommerce.validation.PhoneValidator {
+      }
+    }
+  }
+  
+
+  namespace com.lestscode.ecommerce {
+    namespace validation {
+      class com.lestscode.ecommerce.validation.ValidationErrorHandler {
+      }
+    }
+  }
+  
+
   com.lestscode.ecommerce.controllers.CustomerController o-- com.lestscode.ecommerce.services.interfaces.ICustomeService : customeService
-  com.lestscode.ecommerce.models.customer.CPF .up.|> com.lestscode.ecommerce.models.Validacao
-  com.lestscode.ecommerce.models.customer.Customer o-- com.lestscode.ecommerce.models.customer.CustomerAddress : address
-  com.lestscode.ecommerce.models.customer.Customer o-- com.lestscode.ecommerce.models.customer.CPF : cpf
-  com.lestscode.ecommerce.models.customer.Customer o-- com.lestscode.ecommerce.models.customer.Email : email
-  com.lestscode.ecommerce.models.customer.Customer o-- com.lestscode.ecommerce.models.customer.Phone : phone
-  com.lestscode.ecommerce.models.customer.Email .up.|> com.lestscode.ecommerce.models.Validacao
-  com.lestscode.ecommerce.models.customer.Phone .up.|> com.lestscode.ecommerce.models.Validacao
+  com.lestscode.ecommerce.controllers.CustomerController o-- com.lestscode.ecommerce.repositories.CustomerRepository : customerRepository
+  com.lestscode.ecommerce.controllers.ProductController o-- com.lestscode.ecommerce.repositories.ProductRepository : productRepository
+  com.lestscode.ecommerce.controllers.ProductController o-- com.lestscode.ecommerce.services.ProductService : productService
   com.lestscode.ecommerce.models.order.Order o-- com.lestscode.ecommerce.models.customer.Customer : customer
   com.lestscode.ecommerce.models.order.Order o-- com.lestscode.ecommerce.models.order.OrderStatus : status
-  com.lestscode.ecommerce.models.order.OrderItem o-- com.lestscode.ecommerce.models.product.Product : product
+  com.lestscode.ecommerce.models.order.OrderItem o-- com.lestscode.ecommerce.models.order.OrderProductPK : pk
+  com.lestscode.ecommerce.models.order.OrderProductPK .up.|> java.io.Serializable
+  com.lestscode.ecommerce.models.order.OrderProductPK o-- com.lestscode.ecommerce.models.order.Order : order
+  com.lestscode.ecommerce.models.order.OrderProductPK o-- com.lestscode.ecommerce.models.product.Product : product
   com.lestscode.ecommerce.services.CustomerServices .up.|> com.lestscode.ecommerce.services.interfaces.ICustomeService
   com.lestscode.ecommerce.services.CustomerServices o-- com.lestscode.ecommerce.repositories.CustomerRepository : customerRepository
+  com.lestscode.ecommerce.services.ProductService .up.|> com.lestscode.ecommerce.services.interfaces.IProductService
+  com.lestscode.ecommerce.services.ProductService o-- com.lestscode.ecommerce.repositories.ProductRepository : productRepository
+  com.lestscode.ecommerce.validation.CpfValidator .up.|> javax.validation.ConstraintValidator
+  com.lestscode.ecommerce.validation.DddValidator .up.|> javax.validation.ConstraintValidator
+  com.lestscode.ecommerce.validation.PhoneValidator .up.|> javax.validation.ConstraintValidator
 
 
 right footer

@@ -10,6 +10,22 @@ title __REPOSITORIES's Class Diagram__\n
   }
   
 
+  namespace com.lestscode.ecommerce {
+    namespace repositories {
+      interface com.lestscode.ecommerce.repositories.OrderRepository {
+      }
+    }
+  }
+  
+
+  namespace com.lestscode.ecommerce {
+    namespace repositories {
+      interface com.lestscode.ecommerce.repositories.ProductRepository {
+      }
+    }
+  }
+  
+
 
 
 right footer

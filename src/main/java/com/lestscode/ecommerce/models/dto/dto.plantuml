@@ -18,6 +18,30 @@ title __DTO's Class Diagram__\n
   }
   
 
+  namespace com.lestscode.ecommerce {
+    namespace models {
+      namespace dto {
+        class com.lestscode.ecommerce.models.dto.ProductDto {
+            - description : String
+            - id : Long
+            - name : String
+            - price : BigDecimal
+            + ProductDto()
+            + ProductDto()
+            + getDescription()
+            + getId()
+            + getName()
+            + getPrice()
+            + setDescription()
+            + setId()
+            + setName()
+            + setPrice()
+        }
+      }
+    }
+  }
+  
+
 
 
 right footer

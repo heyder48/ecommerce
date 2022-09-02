@@ -47,7 +47,7 @@ public class CustomerController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<CustomerDto> create(@Valid CustomerForm form){
+    public ResponseEntity<CustomerDto> create(@Valid @RequestBody CustomerForm form){
 
         return ResponseEntity.ok(customeService.create(form));
 
