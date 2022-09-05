@@ -1,6 +1,7 @@
 package com.lestscode.ecommerce.models.order;
 
 import com.lestscode.ecommerce.models.customer.Customer;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -8,12 +9,14 @@ import java.time.LocalDate;
 import java.util.List;
 @Entity
 @Table(name = "orders")
+@Data
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private LocalDate dateCreated;
+    private LocalDate dateModified;
     @OneToMany(mappedBy = "pk.order")
     private List<OrderItem> items;
     @Enumerated(EnumType.STRING)
@@ -35,31 +38,18 @@ public class Order {
         this.customer = customer;
         this.total = BigDecimal.valueOf(items.stream().mapToDouble(OrderItem::getTotalPrice).sum());
     }
+    @PrePersist
+    void OnCreated(){
+        this.setDateCreated(LocalDate.now());
+        this.setDateModified(LocalDate.now());
 
-    public Long getId() {
-        return id;
+    }
+    @PreUpdate
+    void OnUpdate(){
+        this.setDateModified(LocalDate.now());
     }
 
 
-    public List<OrderItem> getItems() {
-        return items;
-    }
-
-    public OrderStatus getStatus() {
-        return status;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public LocalDate getDateCreated() {
-        return dateCreated;
-    }
 
     @Transient
     public int getNumberOfItems(){
