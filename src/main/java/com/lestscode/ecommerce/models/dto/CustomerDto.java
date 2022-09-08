@@ -1,7 +1,9 @@
 package com.lestscode.ecommerce.models.dto;
 
 import com.lestscode.ecommerce.models.customer.Customer;
+import lombok.Data;
 
+@Data
 public class CustomerDto {
 
     private String name;

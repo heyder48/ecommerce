@@ -4,6 +4,9 @@ import com.lestscode.ecommerce.models.order.Order;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Data
 public class OrderDto {
 
@@ -11,8 +14,7 @@ public class OrderDto {
     private Long id;
     private String status;
     private String customerName;
-    private String productName;
-    private int quantity;
+    private List<OrderItemDto> items;
     private BigDecimal totalPrice;
 
     public OrderDto(Order order){
@@ -20,8 +22,9 @@ public class OrderDto {
         this.id = order.getId();
         this.status = order.getStatus().name();
         this.customerName = order.getCustomer().getName();
-        this.productName = order.getItems().get(0).getProduct().getName();
-        this.quantity = order.getItems().get(0).getQuantity();
+        this.items = order.getItems().stream().map(OrderItemDto::new).collect(Collectors.toList());
         this.totalPrice = order.getTotal();
+
     }
+
 }

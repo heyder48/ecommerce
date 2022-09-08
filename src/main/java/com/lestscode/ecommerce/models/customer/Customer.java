@@ -44,6 +44,8 @@ public class Customer{
         this.password = Utils.criptografarSenha(form.getPassword());
     }
 
+
+
     public String getName() {
         return name;
     }

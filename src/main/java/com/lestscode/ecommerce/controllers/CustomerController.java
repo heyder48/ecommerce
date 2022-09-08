@@ -72,6 +72,7 @@ public class CustomerController {
 
         Optional<Customer> customer = customerRepository.findById(id);
         if (customer.isPresent()) {
+            System.out.println("entrou");
             customeService.delete(id);
             return ResponseEntity.ok().build();
         }

@@ -2,19 +2,21 @@ package com.lestscode.ecommerce.models.order;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lestscode.ecommerce.models.product.Product;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
+@Data
 public class OrderItem {
 
     @EmbeddedId
     @JsonIgnore
     private OrderProductPK pk;
     @Column(nullable = false)
-    @Getter @Setter
+
     private Integer quantity;
 
     public OrderItem(){}

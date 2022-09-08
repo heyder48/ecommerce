@@ -5,10 +5,12 @@ import com.lestscode.ecommerce.models.dto.CustomerDto;
 import com.lestscode.ecommerce.models.forms.AtualizarCustomerForm;
 import com.lestscode.ecommerce.models.forms.CustomerForm;
 import com.lestscode.ecommerce.repositories.CustomerRepository;
+import com.lestscode.ecommerce.repositories.OrderRepository;
 import com.lestscode.ecommerce.services.interfaces.ICustomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -18,6 +20,9 @@ public class CustomerServices implements ICustomeService {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Override
     public List<CustomerDto> listAll() {
@@ -41,6 +46,7 @@ public class CustomerServices implements ICustomeService {
     }
 
     @Override
+    @Transactional
     public CustomerDto create(CustomerForm form) {
         Customer customer = new Customer(form);
         customerRepository.save(customer);
@@ -49,6 +55,7 @@ public class CustomerServices implements ICustomeService {
     }
 
     @Override
+    @Transactional
     public CustomerDto update(Long id, AtualizarCustomerForm form) {
         Customer customer = customerRepository.findById(id).get();
         if (form.getName() != null) {
@@ -78,8 +85,10 @@ public class CustomerServices implements ICustomeService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
-        customerRepository.deleteById(id);
+        orderRepository.deleteByCustomer_Id(id);
+        customerRepository.removeById(id);
 
     }
 }

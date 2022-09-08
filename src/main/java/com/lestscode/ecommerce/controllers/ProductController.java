@@ -1,8 +1,12 @@
 package com.lestscode.ecommerce.controllers;
 
+import com.lestscode.ecommerce.models.dto.CategoriaDto;
 import com.lestscode.ecommerce.models.dto.ProductDto;
+import com.lestscode.ecommerce.models.forms.CategoriaForm;
 import com.lestscode.ecommerce.models.forms.ProductForm;
+import com.lestscode.ecommerce.models.product.Categoria;
 import com.lestscode.ecommerce.models.product.Product;
+import com.lestscode.ecommerce.repositories.CategoriaRepository;
 import com.lestscode.ecommerce.repositories.ProductRepository;
 import com.lestscode.ecommerce.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +27,9 @@ public class ProductController {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     @GetMapping
     public ResponseEntity<List<ProductDto>> listAll(){
@@ -80,6 +87,64 @@ public class ProductController {
         return ResponseEntity.notFound().build();
 
     }
+
+    //Categoirias
+    @GetMapping("/categories")
+    public ResponseEntity<List<CategoriaDto>> listAllCategories(){
+
+        return ResponseEntity.ok(productService.listAllCategories());
+
+    }
+
+    @GetMapping("/categories/{id}")
+    public ResponseEntity<CategoriaDto> getCategoryById(@PathVariable Long id){
+
+        Optional<Categoria> categoria = categoriaRepository.findById(id);
+
+        if(categoria.isPresent()){
+            return ResponseEntity.ok(productService.getCategoryById(id));
+        }
+
+        return ResponseEntity.notFound().build();
+
+    }
+
+    @PostMapping("/categories")
+    @Transactional
+    public ResponseEntity<CategoriaDto> createCategory(@RequestBody CategoriaForm form){
+
+            CategoriaDto categoriaDto = productService.createCategory(form);
+            URI uri = URI.create("/products/categories/" + categoriaDto.getId());
+            return ResponseEntity.created(uri).body(categoriaDto);
+    }
+
+    @PutMapping("/categories/{id}")
+    @Transactional
+    public ResponseEntity<CategoriaDto> updateCategory(@PathVariable Long id, @RequestBody CategoriaForm form){
+
+        Optional<Categoria> categoria = categoriaRepository.findById(id);
+        if(categoria.isPresent()){
+            return ResponseEntity.ok(productService.updateCategory(id, form));
+        }
+
+        return ResponseEntity.notFound().build();
+
+    }
+
+    @DeleteMapping("/categories/{id}")
+    @Transactional
+    public ResponseEntity<?> deleteCategory(@PathVariable Long id){
+
+        Optional<Categoria> categoria = categoriaRepository.findById(id);
+        if(categoria.isPresent()){
+            productService.deleteCategory(id);
+            return ResponseEntity.ok().build();
+        }
+
+        return ResponseEntity.notFound().build();
+
+    }
+
 
 
 }

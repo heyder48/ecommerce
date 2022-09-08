@@ -1,5 +1,6 @@
 package com.lestscode.ecommerce.models.product;
 
+import com.lestscode.ecommerce.models.dto.ProductDto;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -28,6 +29,13 @@ public class Product {
         this.name = name;
         this.description = description;
         this.price = BigDecimal.valueOf(price);
+    }
+
+    public Product(ProductDto productDto){
+        this.id = productDto.getId();
+        this.name = productDto.getName();
+        this.description = productDto.getDescription();
+        this.price = productDto.getPrice();
     }
 
 

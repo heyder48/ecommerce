@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 @Entity
 @Table(name = "orders")
@@ -18,12 +19,12 @@ public class Order {
     private LocalDate dateCreated;
     private LocalDate dateModified;
     @OneToMany(mappedBy = "pk.order")
-    private List<OrderItem> items;
+    private List<OrderItem> items = new ArrayList<>();
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 
     //@JoinColumn(name = "customer_id" , referencedColumnName = "id")
     private Customer customer;
@@ -34,7 +35,6 @@ public class Order {
     public Order(List<OrderItem> items, Customer customer) {
 
         this.items = items;
-        this.status = OrderStatus.CREATED;
         this.customer = customer;
         this.total = BigDecimal.valueOf(items.stream().mapToDouble(OrderItem::getTotalPrice).sum());
     }
@@ -42,6 +42,7 @@ public class Order {
     void OnCreated(){
         this.setDateCreated(LocalDate.now());
         this.setDateModified(LocalDate.now());
+        this.setStatus(OrderStatus.CREATED);
 
     }
     @PreUpdate

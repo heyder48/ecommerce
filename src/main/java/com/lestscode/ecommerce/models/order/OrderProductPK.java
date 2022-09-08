@@ -23,6 +23,8 @@ public class OrderProductPK  implements Serializable {
     @Getter @Setter
     private Product product;
 
+    public OrderProductPK(){}
+
     public OrderProductPK(Order order, Product product) {
         this.order = order;
         this.product = product;
