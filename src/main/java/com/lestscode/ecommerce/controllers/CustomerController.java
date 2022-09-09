@@ -5,6 +5,7 @@ import com.lestscode.ecommerce.models.customer.Customer;
 import com.lestscode.ecommerce.models.dto.CustomerDto;
 import com.lestscode.ecommerce.models.forms.AtualizarCustomerForm;
 import com.lestscode.ecommerce.models.forms.CustomerForm;
+import com.lestscode.ecommerce.models.forms.UpdatePasswordForm;
 import com.lestscode.ecommerce.repositories.CustomerRepository;
 import com.lestscode.ecommerce.services.interfaces.ICustomeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,11 +56,28 @@ public class CustomerController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<CustomerDto> update(@PathVariable Long id, AtualizarCustomerForm form){
+    public ResponseEntity<CustomerDto> update(@PathVariable Long id, @RequestBody AtualizarCustomerForm form){
 
         Optional<Customer> customer = customerRepository.findById(id);
         if (customer.isPresent()) {
             return ResponseEntity.ok(customeService.update(id, form));
+        }
+
+        return ResponseEntity.notFound().build();
+
+    }
+
+    @PutMapping("/{id}/updatepassword")
+    @Transactional
+    public ResponseEntity<String> updatePassword(@PathVariable Long id,@Valid @RequestBody UpdatePasswordForm form){
+
+        Optional<Customer> customer = customerRepository.findById(id);
+        if (customer.isPresent()) {
+
+            if (customeService.updatePassword(id, form)) {
+                return ResponseEntity.ok("Senha atualizada com sucesso");
+            }
+            return ResponseEntity.badRequest().body("Senha atual não confere");
         }
 
         return ResponseEntity.notFound().build();
@@ -74,6 +92,7 @@ public class CustomerController {
         if (customer.isPresent()) {
             System.out.println("entrou");
             customeService.delete(id);
+            customerRepository.delete(customer.get());
             return ResponseEntity.ok().build();
         }
 
