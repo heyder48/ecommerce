@@ -24,11 +24,13 @@ public class Product {
 
     public Product(){}
 
-    public Product( String name, String description, Double price) {
+    public Product( String name, String description, Double price, Categoria categoria) {
 
         this.name = name;
         this.description = description;
         this.price = BigDecimal.valueOf(price);
+        this.categoria = categoria;
+
     }
 
     public Product(ProductDto productDto){

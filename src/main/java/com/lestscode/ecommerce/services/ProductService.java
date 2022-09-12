@@ -4,13 +4,16 @@ import com.lestscode.ecommerce.models.dto.CategoriaDto;
 import com.lestscode.ecommerce.models.dto.ProductDto;
 import com.lestscode.ecommerce.models.forms.CategoriaForm;
 import com.lestscode.ecommerce.models.forms.ProductForm;
+import com.lestscode.ecommerce.models.product.Categoria;
 import com.lestscode.ecommerce.models.product.Product;
+import com.lestscode.ecommerce.repositories.CategoriaRepository;
 import com.lestscode.ecommerce.repositories.ProductRepository;
 import com.lestscode.ecommerce.services.interfaces.ICategoriaService;
 import com.lestscode.ecommerce.services.interfaces.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -23,6 +26,9 @@ public class ProductService implements IProductService {
     private ProductRepository productRepository;
     @Autowired
     private ICategoriaService categoriaService;
+
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
 
     @Override
@@ -42,10 +48,14 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    @Transactional
     public ProductDto create(ProductForm form) {
 
-        Product product = new Product(form.getName(), form.getDescription(), form.getPrice());
+        Categoria categoria = categoriaRepository.findById(form.getCategoriaId()).get();
+
+        Product product = new Product(form.getName(), form.getDescription(), form.getPrice(), categoria);
         productRepository.save(product);
+
 
         return new ProductDto(product);
     }
