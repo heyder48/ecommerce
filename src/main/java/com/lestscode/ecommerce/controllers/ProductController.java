@@ -9,6 +9,7 @@ import com.lestscode.ecommerce.models.product.Product;
 import com.lestscode.ecommerce.repositories.CategoriaRepository;
 import com.lestscode.ecommerce.repositories.ProductRepository;
 import com.lestscode.ecommerce.services.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,7 @@ public class ProductController {
     private CategoriaRepository categoriaRepository;
 
     @GetMapping
+    @Operation(summary = "List all products")
     public ResponseEntity<List<ProductDto>> listAll(){
 
         return ResponseEntity.ok(productService.listAll());
@@ -39,6 +41,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get product by id")
     public ResponseEntity<ProductDto> getById(@PathVariable Long id){
 
         Optional<Product> product = productRepository.findById(id);
@@ -52,6 +55,7 @@ public class ProductController {
 
     @PostMapping
     @Transactional
+    @Operation(summary = "Create a new product")
     public ResponseEntity<ProductDto> create(@RequestBody ProductForm form){
 
         ProductDto productDto = productService.create(form);
@@ -63,6 +67,7 @@ public class ProductController {
 
     @PutMapping("/{id}")
     @Transactional
+    @Operation(summary = "Update product")
     public ResponseEntity<ProductDto> update(@PathVariable Long id, @RequestBody ProductForm form){
 
         Optional<Product> product = productRepository.findById(id);
@@ -76,6 +81,7 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     @Transactional
+    @Operation(summary = "Delete product by id")
     public ResponseEntity<?> delete(@PathVariable Long id){
 
         Optional<Product> product = productRepository.findById(id);
@@ -90,6 +96,7 @@ public class ProductController {
 
     //Categoirias
     @GetMapping("/categories")
+    @Operation(summary = "List all categories")
     public ResponseEntity<List<CategoriaDto>> listAllCategories(){
 
         return ResponseEntity.ok(productService.listAllCategories());
@@ -97,6 +104,7 @@ public class ProductController {
     }
 
     @GetMapping("/categories/{id}")
+    @Operation(summary = "Get category by id")
     public ResponseEntity<CategoriaDto> getCategoryById(@PathVariable Long id){
 
         Optional<Categoria> categoria = categoriaRepository.findById(id);
@@ -111,6 +119,7 @@ public class ProductController {
 
     @PostMapping("/categories")
     @Transactional
+    @Operation(summary = "Create a new category")
     public ResponseEntity<CategoriaDto> createCategory(@RequestBody CategoriaForm form){
 
             CategoriaDto categoriaDto = productService.createCategory(form);
@@ -120,6 +129,7 @@ public class ProductController {
 
     @PutMapping("/categories/{id}")
     @Transactional
+    @Operation(summary = "Update category")
     public ResponseEntity<CategoriaDto> updateCategory(@PathVariable Long id, @RequestBody CategoriaForm form){
 
         Optional<Categoria> categoria = categoriaRepository.findById(id);
@@ -133,6 +143,7 @@ public class ProductController {
 
     @DeleteMapping("/categories/{id}")
     @Transactional
+    @Operation(summary = "Delete category by id")
     public ResponseEntity<?> deleteCategory(@PathVariable Long id){
 
         Optional<Categoria> categoria = categoriaRepository.findById(id);

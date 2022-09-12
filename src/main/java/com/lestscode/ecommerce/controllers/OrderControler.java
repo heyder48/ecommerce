@@ -6,6 +6,7 @@ import com.lestscode.ecommerce.models.forms.UpdateOrderForm;
 import com.lestscode.ecommerce.models.order.Order;
 import com.lestscode.ecommerce.repositories.OrderRepository;
 import com.lestscode.ecommerce.services.interfaces.IOrderService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,12 +26,14 @@ public class OrderControler {
     private OrderRepository orderRepository;
 
     @GetMapping
+    @Operation(summary = "List all orders")
     public ResponseEntity<List<OrderDto>> listAll(){
 
         return ResponseEntity.ok(orderService.listAll());
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get order by id")
     public ResponseEntity<OrderDto> getById(@PathVariable Long id){
 
         Optional<Order> order =orderRepository.findById(id);
@@ -43,6 +46,7 @@ public class OrderControler {
     }
 
     @PutMapping("/updatestatus/{id}")
+    @Operation(summary = "Update order status")
     public ResponseEntity<OrderDto> updateStatus(@PathVariable Long id, @RequestBody UpdateOrderForm orderForm) {
 
         Optional<Order> order = orderRepository.findById(id);
@@ -54,6 +58,7 @@ public class OrderControler {
     }
 
     @PostMapping
+    @Operation(summary = "Create a new order")
     public ResponseEntity<OrderDto> create(@RequestBody OrderForm form){
 
         OrderDto orderDto = orderService.create(form);
@@ -62,6 +67,7 @@ public class OrderControler {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete order by id")
     public ResponseEntity<Void> delete(@PathVariable Long id){
 
         Optional<Order> order = orderRepository.findById(id);

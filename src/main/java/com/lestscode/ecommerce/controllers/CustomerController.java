@@ -8,7 +8,9 @@ import com.lestscode.ecommerce.models.forms.CustomerForm;
 import com.lestscode.ecommerce.models.forms.UpdatePasswordForm;
 import com.lestscode.ecommerce.repositories.CustomerRepository;
 import com.lestscode.ecommerce.services.interfaces.ICustomeService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Description;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +30,9 @@ public class CustomerController {
     private CustomerRepository customerRepository;
 
 
+    @Description("List all customers")
+    @Operation(summary = "List all customers")
+
     @GetMapping
     public ResponseEntity<List<CustomerDto>> listAll(){
 
@@ -35,6 +40,8 @@ public class CustomerController {
 
     }
 
+    @Description("Get customer by id")
+    @Operation(summary = "Get customer by id")
     @GetMapping("/{id}")
     public ResponseEntity<CustomerDto> getById(@PathVariable Long id){
 
@@ -46,6 +53,8 @@ public class CustomerController {
 
     }
 
+    @Description("Create a new customer")
+    @Operation(summary = "Create a new customer")
     @PostMapping
     @Transactional
     public ResponseEntity<CustomerDto> create(@Valid @RequestBody CustomerForm form){
@@ -54,6 +63,8 @@ public class CustomerController {
 
     }
 
+    @Description("Update customer")
+    @Operation(summary = "Update customer")
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<CustomerDto> update(@PathVariable Long id, @RequestBody AtualizarCustomerForm form){
@@ -67,6 +78,8 @@ public class CustomerController {
 
     }
 
+    @Description("Update customer password")
+    @Operation(summary = "Update customer password")
     @PutMapping("/{id}/updatepassword")
     @Transactional
     public ResponseEntity<String> updatePassword(@PathVariable Long id,@Valid @RequestBody UpdatePasswordForm form){
@@ -84,6 +97,8 @@ public class CustomerController {
 
     }
 
+    @Description("Delete customer")
+    @Operation(summary = "Delete customer")
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<?> delete(@PathVariable Long id){
